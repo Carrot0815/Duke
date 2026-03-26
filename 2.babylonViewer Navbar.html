@@ -1,43 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>BabylonJS Viewer - Basic usage</title>
-        <style>
-			.viewerContainer {
-                width: 400px;
-                height: 500px;				
-				image-rendering: pixelated; /* to prevent blury when zoomed out */
-			}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>BabylonJS Viewer - Basic usage</title>
 
-        </style>
-		<script src="https://cdn.babylonjs.com/viewer/babylon.viewer.js"></script>
-	<script>
-		function loadit(modelUrl) {
-			if(modelUrl) {
-				let viewer = BabylonViewer.viewerManager.getViewerById('viewerID');
-				let temp = viewer.templateManager.getTemplate('navBar');
-				let param= temp._configuration;
-				param.params.hideVr=false;
-                param.params.disableOnFullscreen=true;
-				temp.updateParams(param);
-				viewer.loadModel(modelUrl)
-			}
-		}
-	</script>
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #74ebd5, #ACB6E5);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 520px;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.18);
+            text-align: center;
+        }
+
+        h1 {
+            margin: 0 0 20px;
+            font-size: 28px;
+            color: #333;
+        }
+
+        .subtitle {
+            margin: 0 0 20px;
+            color: #666;
+            font-size: 14px;
+        }
+
+        select {
+            width: 100%;
+            padding: 12px 14px;
+            margin-bottom: 20px;
+            border: 1px solid #d9d9d9;
+            border-radius: 10px;
+            font-size: 16px;
+            background: #f8f8f8;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        select:hover,
+        select:focus {
+            border-color: #74ebd5;
+            background: #fff;
+        }
+
+        .viewerContainer {
+            width: 100%;
+            height: 500px;
+            border-radius: 14px;
+            overflow: hidden;
+            background: #f3f3f3;
+            image-rendering: pixelated; /* to prevent blury when zoomed out */
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.08);
+        }
+
+        babylon {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+
+    <script src="https://cdn.babylonjs.com/viewer/babylon.viewer.js"></script>
+    <script>
+        function loadit(modelUrl) {
+            if(modelUrl) {
+                let viewer = BabylonViewer.viewerManager.getViewerById('viewerID');
+                let temp = viewer.templateManager.getTemplate('navBar');
+                let param = temp._configuration;
+                param.params.hideVr = false;
+                param.params.disableOnFullscreen = true;
+                temp.updateParams(param);
+                viewer.loadModel(modelUrl)
+            }
+        }
+    </script>
 </head>
-<body>
-<select onchange="loadit(this.value)">
-	<option value="">select model</option>
-	<option value="./models/bear.glb">Bear</option>
-	<option value="./models/hunter.glb">Hunter</option>
-	<option value="./models/grandma.glb">Grandma</option>
-</select>
-<div class='viewerContainer'>
-	<babylon id="viewerID"><vr></vr></babylon>
-</div>
-</body>
 
+<body>
+    <div class="container">
+        <h1>3D Model Viewer</h1>
+        <p class="subtitle">Select a model to preview in BabylonJS</p>
+
+        <select onchange="loadit(this.value)">
+            <option value="">select model</option>
+            <option value="./models/bear.glb">Bear</option>
+            <option value="./models/hunter.glb">Hunter</option>
+            <option value="./models/grandma.glb">Grandma</option>
+        </select>
+
+        <div class="viewerContainer">
+            <babylon id="viewerID"><vr></vr></babylon>
+        </div>
+    </div>
+</body>
 </html>
