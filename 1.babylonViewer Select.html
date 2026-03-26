@@ -8,7 +8,7 @@
         <style>
 			.viewerContainer {
                 width: 400px;
-                height: 500px;				
+                height: 500px;	
 				image-rendering: pixelated; /* to prevent blury when zoomed out */
 			}
 
@@ -26,9 +26,9 @@
 <body>
 <select onchange="loadit(this.value)">
 	<option value="">select model</option>
-	<option value="./models/bear.glb">Alice</option>
-	<option value="./models/hunter.glb">Astronaut</option>
-	<option value="./models/grandma.glb">Stacy</option>
+	<option value="./models/bear.glb">Bear</option>
+	<option value="./models/hunter.glb">Hunter</option>
+	<option value="./models/grandma.glb">Grandma</option>
 </select>
 <div class='viewerContainer'>
 	<babylon id="viewerID"></babylon>
